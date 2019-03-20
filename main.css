@@ -9,9 +9,28 @@
   .container {
     max-width: 600px;
     margin: 0 auto;
+
   }
   
   .hidden {
     display: none;
   }
+
+  /* .results{
+    display: flex;
+    flex-direction: column;
+  } */
+  .pics{
+    display:flex;
+    flex-direction: row;
+    background-color: gray;
+  }
+  .results-img{
+    margin:10px;
+    flex:1;
+    width: 50%;
+
+  }
+  
+ 
   

@@ -1,28 +1,39 @@
-function getDogImage(){
-    fetch('https://dog.ceo/api/breeds/image/random/3')
+function getDogImage(num){
+    fetch(`https://dog.ceo/api/breeds/image/random/${num}`)
         .then(response => response.json())
-        .then(response => displayResults(responseJson))
+        // .then(responseJson => console.log(responseJson))
+        .then(responseJson => displayResults(responseJson))
         .catch(error => alert('Something went wrong.  Try again later!'));
 }
 
-function displayResults(){
-    console.log(responseJson.message);
-    $('.results-img').replaceWith(`<img src="${responseJson.message}" class="results-img">`)
-    $('.results').removeClass('hidden')
+function displayResults(responseJson){
+    console.log(responseJson);
+    let myDogArr = responseJson.message;
+    let myHTML = "";
+    myDogArr.forEach(function(item){
+        myHTML += `<img src="${item}"></img>`;
+    }); 
+    console.log(myHTML);
+    $('.results-img').replaceWith(
+       myHTML
+      )
+    $('.results').removeClass('hidden');
 }
+
 
 function watchForm() {
     $('form').submit(event => {
-      event.preventDefault();
-      $('input').keyup(function(){
-          let value = $(this).val();
-      })
-      .keyup();
-      getDogImage();
+        event.preventDefault();
+        formReset();
+        let value = $('input').val();
+        getDogImage(value);
     });
-
 }
-  
+
+function formReset() {
+    document.getElementById("form").reset();
+  }
+
 $(function() {
     console.log('App loaded! Waiting for submit!');
     watchForm();
